@@ -24,17 +24,27 @@
       <!-- ======================= HEADER ======================= -->
       <header class="site-header">
         <div class="header-top">
+          
           <img src="img/loreal-logo.png" alt="L'Oréal" class="logo" />
 
-          <!-- RTL Language Support (LevelUp): toggles the whole page direction -->
-          <button id="rtlToggle" class="rtl-toggle" type="button" aria-pressed="false">
+          <!-- RTL Language Support (LevelUp): real translation + direction switch,
+               not just a font-direction flip. Includes both RTL and LTR languages. -->
+          <div class="lang-switcher">
             <i class="fa-solid fa-globe" aria-hidden="true"></i>
-            <span id="rtlToggleLabel">العربية</span>
-          </button>
+            <label for="langSelect" class="visually-hidden" data-i18n="languageLabel">Language</label>
+            <select id="langSelect">
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+              <option value="he">עברית</option>
+              <option value="fr">Français</option>
+              <option value="es">Español</option>
+              <option value="de">Deutsch</option>
+            </select>
+          </div>
         </div>
-        <p class="eyebrow">Personalized Beauty, Powered by AI</p>
-        <h1 class="site-title">Your Routine Builder</h1>
-        <p class="site-subtitle">
+        <p class="eyebrow" data-i18n="eyebrow">Personalized Beauty, Powered by AI</p>
+        <h1 class="site-title" data-i18n="title">Your Routine Builder</h1>
+        <p class="site-subtitle" data-i18n="subtitle">
           Choose real products from our family of brands and let your advisor
           craft a routine built around them.
         </p>
@@ -49,23 +59,24 @@
             id="productSearch"
             type="text"
             placeholder="Search by product or brand…"
+            data-i18n-placeholder="searchPlaceholder"
             autocomplete="off"
           />
         </div>
 
         <label for="categoryFilter" class="visually-hidden">Filter by category</label>
         <select id="categoryFilter">
-          <option value="">All Categories</option>
-          <option value="cleanser">Cleansers</option>
-          <option value="moisturizer">Moisturizers</option>
-          <option value="skincare">Skincare &amp; Treatments</option>
-          <option value="haircare">Haircare</option>
-          <option value="hair color">Hair Color</option>
-          <option value="hair styling">Hair Styling</option>
-          <option value="makeup">Makeup</option>
-          <option value="suncare">Suncare</option>
-          <option value="men's grooming">Men's Grooming</option>
-          <option value="fragrance">Fragrance</option>
+          <option value="" data-i18n-cat="all">All Categories</option>
+          <option value="cleanser" data-i18n-cat="cleanser">Cleansers</option>
+          <option value="moisturizer" data-i18n-cat="moisturizer">Moisturizers</option>
+          <option value="skincare" data-i18n-cat="skincare">Skincare &amp; Treatments</option>
+          <option value="haircare" data-i18n-cat="haircare">Haircare</option>
+          <option value="hair color" data-i18n-cat="hair color">Hair Color</option>
+          <option value="hair styling" data-i18n-cat="hair styling">Hair Styling</option>
+          <option value="makeup" data-i18n-cat="makeup">Makeup</option>
+          <option value="suncare" data-i18n-cat="suncare">Suncare</option>
+          <option value="men's grooming" data-i18n-cat="men's grooming">Men's Grooming</option>
+          <option value="fragrance" data-i18n-cat="fragrance">Fragrance</option>
         </select>
       </div>
 
@@ -75,23 +86,26 @@
       <!-- ======================= SELECTED PRODUCTS ======================= -->
       <section class="selected-products">
         <div class="selected-header">
-          <h2>Selected Products <span id="selectedCount" class="count-badge">0</span></h2>
-          <button id="clearAllBtn" class="clear-all-btn" type="button">Clear All</button>
+          <h2><span data-i18n="selectedProductsHeading">Selected Products</span> <span id="selectedCount" class="count-badge">0</span></h2>
+          <button id="clearAllBtn" class="clear-all-btn" type="button" data-i18n="clearAll">Clear All</button>
         </div>
 
         <div id="selectedProductsList" class="selected-list"></div>
 
         <button id="generateRoutine" class="generate-btn" type="button" disabled>
           <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-          Generate Routine
+          <span data-i18n="generateBtn">Generate Routine</span>
         </button>
       </section>
 
       <!-- ======================= CHAT AREA ======================= -->
       <section class="chatbox">
-        <h2>Ask Your Advisor</h2>
+        <div class="chatbox-header">
+          <h2 data-i18n="chatHeading">Ask Your Advisor</h2>
+          <button id="clearHistoryBtn" class="clear-all-btn" type="button" data-i18n="clearHistory">Clear History</button>
+        </div>
         <div id="chatWindow" class="chat-window" aria-live="polite">
-          <p class="placeholder-message">
+          <p class="placeholder-message" data-i18n="chatInitialPlaceholder">
             Select a few products above and generate your routine to start the conversation.
           </p>
         </div>
@@ -130,12 +144,12 @@
 
       <!-- ======================= FOOTER ======================= -->
       <footer class="site-footer">
-        <p>&copy; 2025 L'Oréal. All rights reserved.</p>
+        <p data-i18n="footerCopyright">&copy; 2025 L'Oréal. All rights reserved.</p>
         <nav>
           <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
+          <a href="#" data-i18n="privacy">Privacy Policy</a>
+          <a href="#" data-i18n="terms">Terms of Use</a>
+          <a href="#" data-i18n="contact">Contact</a>
         </nav>
       </footer>
     </div>

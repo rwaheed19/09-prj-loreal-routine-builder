@@ -9,8 +9,7 @@
 --------------------------------------------------------------------- */
 
 // TODO: Add your Cloudflare Worker URL here (this is what keeps your
-// OpenAI API key hidden from the browser). Example:
-// const WORKER_URL = "https://loreal-routine.your-subdomain.workers.dev/";
+// OpenAI API key hidden from the browser).
 const WORKER_URL = "https://chatbot-worker.rwaheed2.workers.dev/";
 
 // The system prompt is what tells the AI *how* to behave. It only ever
@@ -35,6 +34,275 @@ something unrelated (e.g. homework help, coding, unrelated trivia), politely
 steer the conversation back to beauty and routines.`;
 
 const STORAGE_KEY = "lorealSelectedProductIds";
+const LANG_STORAGE_KEY = "lorealLang";
+
+/* ---------------------------------------------------------------------
+   1B) TRANSLATIONS (LevelUp: RTL Language Support)
+   A real language switch changes both the *text* and the *direction* —
+   not just the direction. RTL_LANGS lists which language codes flip the
+   page to right-to-left; every other language stays left-to-right.
+--------------------------------------------------------------------- */
+const RTL_LANGS = ["ar", "he"];
+
+const translations = {
+  en: {
+    languageLabel: "Language",
+    eyebrow: "Personalized Beauty, Powered by AI",
+    title: "Your Routine Builder",
+    subtitle:
+      "Choose real products from our family of brands and let your advisor craft a routine built around them.",
+    searchPlaceholder: "Search by product or brand…",
+    selectedProductsHeading: "Selected Products",
+    clearAll: "Clear All",
+    generateBtn: "Generate Routine",
+    chatHeading: "Ask Your Advisor",
+    clearHistory: "Clear History",
+    chatInitialPlaceholder: "Select a few products above and generate your routine to start the conversation.",
+    chatInputBefore: "Generate a routine first, then ask a follow-up question…",
+    chatInputAfter: "Ask a follow-up question about your routine…",
+    selectBtn: "Select",
+    selectedBtn: "Selected",
+    addToRoutine: "Add to Routine",
+    removeFromRoutine: "Remove from Routine",
+    noProductsSelected: "No products selected yet.",
+    noProductsMatch: "No products match your search. Try a different keyword or category.",
+    privacy: "Privacy Policy",
+    terms: "Terms of Use",
+    contact: "Contact",
+    generateChatUserMsg: "Generate my routine from the selected products.",
+    thinking: "Thinking…",
+    footerCopyright: "© 2025 L'Oréal. All rights reserved.",
+    categories: {
+      all: "All Categories",
+      cleanser: "Cleansers",
+      moisturizer: "Moisturizers",
+      skincare: "Skincare & Treatments",
+      haircare: "Haircare",
+      "hair color": "Hair Color",
+      "hair styling": "Hair Styling",
+      makeup: "Makeup",
+      suncare: "Suncare",
+      "men's grooming": "Men's Grooming",
+      fragrance: "Fragrance",
+    },
+  },
+  ar: {
+    languageLabel: "اللغة",
+    eyebrow: "جمال شخصي، مدعوم بالذكاء الاصطناعي",
+    title: "منشئ روتينك الخاص",
+    subtitle: "اختر منتجات حقيقية من مجموعة علاماتنا التجارية، ودع مستشارك يصمم لك روتينًا يناسبها.",
+    searchPlaceholder: "ابحث عن منتج أو علامة تجارية…",
+    selectedProductsHeading: "المنتجات المختارة",
+    clearAll: "مسح الكل",
+    generateBtn: "إنشاء الروتين",
+    chatHeading: "اسأل مستشارك",
+    clearHistory: "مسح المحادثة",
+    chatInitialPlaceholder: "اختر بعض المنتجات أعلاه وأنشئ روتينك لبدء المحادثة.",
+    chatInputBefore: "أنشئ روتينًا أولًا، ثم اطرح سؤال متابعة…",
+    chatInputAfter: "اطرح سؤال متابعة حول روتينك…",
+    selectBtn: "اختيار",
+    selectedBtn: "تم الاختيار",
+    addToRoutine: "أضف إلى الروتين",
+    removeFromRoutine: "إزالة من الروتين",
+    noProductsSelected: "لم يتم اختيار أي منتجات بعد.",
+    noProductsMatch: "لا توجد منتجات مطابقة لبحثك. جرّب كلمة أو فئة مختلفة.",
+    privacy: "سياسة الخصوصية",
+    terms: "شروط الاستخدام",
+    contact: "اتصل بنا",
+    generateChatUserMsg: "أنشئ روتيني من المنتجات المختارة.",
+    thinking: "جارٍ التفكير…",
+    footerCopyright: "© 2025 لوريال. جميع الحقوق محفوظة.",
+    categories: {
+      all: "كل الفئات",
+      cleanser: "منظفات",
+      moisturizer: "مرطبات",
+      skincare: "العناية بالبشرة",
+      haircare: "العناية بالشعر",
+      "hair color": "صبغة الشعر",
+      "hair styling": "تصفيف الشعر",
+      makeup: "مكياج",
+      suncare: "واقي الشمس",
+      "men's grooming": "العناية بالرجال",
+      fragrance: "عطور",
+    },
+  },
+  he: {
+    languageLabel: "שפה",
+    eyebrow: "יופי מותאם אישית, מופעל בבינה מלאכותית",
+    title: "בונה השגרה שלך",
+    subtitle: "בחרו מוצרים אמיתיים ממשפחת המותגים שלנו, והיועץ שלכם יבנה עבורכם שגרה מותאמת.",
+    searchPlaceholder: "חיפוש לפי מוצר או מותג…",
+    selectedProductsHeading: "מוצרים נבחרים",
+    clearAll: "נקה הכול",
+    generateBtn: "צור שגרה",
+    chatHeading: "שאלו את היועץ שלכם",
+    clearHistory: "נקה היסטוריה",
+    chatInitialPlaceholder: "בחרו כמה מוצרים למעלה וצרו שגרה כדי להתחיל בשיחה.",
+    chatInputBefore: "צרו שגרה קודם, ואז שאלו שאלת המשך…",
+    chatInputAfter: "שאלו שאלת המשך על השגרה שלכם…",
+    selectBtn: "בחר",
+    selectedBtn: "נבחר",
+    addToRoutine: "הוסף לשגרה",
+    removeFromRoutine: "הסר מהשגרה",
+    noProductsSelected: "עדיין לא נבחרו מוצרים.",
+    noProductsMatch: "לא נמצאו מוצרים תואמים. נסו מילת חיפוש או קטגוריה אחרת.",
+    privacy: "מדיניות פרטיות",
+    terms: "תנאי שימוש",
+    contact: "צור קשר",
+    generateChatUserMsg: "צור את השגרה שלי מהמוצרים שנבחרו.",
+    thinking: "חושב…",
+    footerCopyright: "© 2025 לוריאל. כל הזכויות שמורות.",
+    categories: {
+      all: "כל הקטגוריות",
+      cleanser: "מנקים",
+      moisturizer: "קרמי לחות",
+      skincare: "טיפוח העור",
+      haircare: "טיפוח השיער",
+      "hair color": "צבע שיער",
+      "hair styling": "עיצוב שיער",
+      makeup: "איפור",
+      suncare: "הגנה מהשמש",
+      "men's grooming": "טיפוח לגברים",
+      fragrance: "בושם",
+    },
+  },
+  fr: {
+    languageLabel: "Langue",
+    eyebrow: "Beauté personnalisée, propulsée par l'IA",
+    title: "Votre créateur de routine",
+    subtitle:
+      "Choisissez de vrais produits parmi nos marques et laissez votre conseiller créer une routine sur mesure.",
+    searchPlaceholder: "Rechercher un produit ou une marque…",
+    selectedProductsHeading: "Produits sélectionnés",
+    clearAll: "Tout effacer",
+    generateBtn: "Générer la routine",
+    chatHeading: "Interrogez votre conseiller",
+    clearHistory: "Effacer l'historique",
+    chatInitialPlaceholder: "Sélectionnez quelques produits ci-dessus et générez votre routine pour démarrer la conversation.",
+    chatInputBefore: "Générez d'abord une routine, puis posez une question…",
+    chatInputAfter: "Posez une question sur votre routine…",
+    selectBtn: "Sélectionner",
+    selectedBtn: "Sélectionné",
+    addToRoutine: "Ajouter à la routine",
+    removeFromRoutine: "Retirer de la routine",
+    noProductsSelected: "Aucun produit sélectionné pour l'instant.",
+    noProductsMatch: "Aucun produit ne correspond à votre recherche. Essayez un autre mot-clé ou une autre catégorie.",
+    privacy: "Politique de confidentialité",
+    terms: "Conditions d'utilisation",
+    contact: "Contact",
+    generateChatUserMsg: "Génère ma routine à partir des produits sélectionnés.",
+    thinking: "Réflexion en cours…",
+    footerCopyright: "© 2025 L'Oréal. Tous droits réservés.",
+    categories: {
+      all: "Toutes les catégories",
+      cleanser: "Nettoyants",
+      moisturizer: "Hydratants",
+      skincare: "Soins de la peau",
+      haircare: "Soins capillaires",
+      "hair color": "Coloration capillaire",
+      "hair styling": "Coiffage",
+      makeup: "Maquillage",
+      suncare: "Protection solaire",
+      "men's grooming": "Soins pour hommes",
+      fragrance: "Parfum",
+    },
+  },
+  es: {
+    languageLabel: "Idioma",
+    eyebrow: "Belleza personalizada, impulsada por IA",
+    title: "Tu creador de rutinas",
+    subtitle:
+      "Elige productos reales de nuestra familia de marcas y deja que tu asesor cree una rutina a tu medida.",
+    searchPlaceholder: "Buscar por producto o marca…",
+    selectedProductsHeading: "Productos seleccionados",
+    clearAll: "Borrar todo",
+    generateBtn: "Generar rutina",
+    chatHeading: "Consulta a tu asesor",
+    clearHistory: "Borrar historial",
+    chatInitialPlaceholder: "Selecciona algunos productos arriba y genera tu rutina para comenzar la conversación.",
+    chatInputBefore: "Genera primero una rutina y luego haz una pregunta…",
+    chatInputAfter: "Haz una pregunta sobre tu rutina…",
+    selectBtn: "Seleccionar",
+    selectedBtn: "Seleccionado",
+    addToRoutine: "Añadir a la rutina",
+    removeFromRoutine: "Quitar de la rutina",
+    noProductsSelected: "Aún no has seleccionado productos.",
+    noProductsMatch: "Ningún producto coincide con tu búsqueda. Prueba otra palabra clave o categoría.",
+    privacy: "Política de privacidad",
+    terms: "Términos de uso",
+    contact: "Contacto",
+    generateChatUserMsg: "Genera mi rutina a partir de los productos seleccionados.",
+    thinking: "Pensando…",
+    footerCopyright: "© 2025 L'Oréal. Todos los derechos reservados.",
+    categories: {
+      all: "Todas las categorías",
+      cleanser: "Limpiadores",
+      moisturizer: "Hidratantes",
+      skincare: "Cuidado de la piel",
+      haircare: "Cuidado del cabello",
+      "hair color": "Color de cabello",
+      "hair styling": "Peinado",
+      makeup: "Maquillaje",
+      suncare: "Protección solar",
+      "men's grooming": "Cuidado masculino",
+      fragrance: "Fragancia",
+    },
+  },
+  de: {
+    languageLabel: "Sprache",
+    eyebrow: "Personalisierte Schönheit, unterstützt durch KI",
+    title: "Dein Routine-Builder",
+    subtitle:
+      "Wähle echte Produkte aus unserer Markenfamilie und lass deinen Berater eine passende Routine zusammenstellen.",
+    searchPlaceholder: "Nach Produkt oder Marke suchen…",
+    selectedProductsHeading: "Ausgewählte Produkte",
+    clearAll: "Alle löschen",
+    generateBtn: "Routine erstellen",
+    chatHeading: "Frag deinen Berater",
+    clearHistory: "Verlauf löschen",
+    chatInitialPlaceholder: "Wähle oben ein paar Produkte aus und erstelle deine Routine, um das Gespräch zu beginnen.",
+    chatInputBefore: "Erstelle zuerst eine Routine und stelle dann eine Frage…",
+    chatInputAfter: "Stelle eine Frage zu deiner Routine…",
+    selectBtn: "Auswählen",
+    selectedBtn: "Ausgewählt",
+    addToRoutine: "Zur Routine hinzufügen",
+    removeFromRoutine: "Aus der Routine entfernen",
+    noProductsSelected: "Noch keine Produkte ausgewählt.",
+    noProductsMatch: "Keine Produkte entsprechen deiner Suche. Versuche ein anderes Stichwort oder eine andere Kategorie.",
+    privacy: "Datenschutzrichtlinie",
+    terms: "Nutzungsbedingungen",
+    contact: "Kontakt",
+    generateChatUserMsg: "Erstelle meine Routine aus den ausgewählten Produkten.",
+    thinking: "Denke nach…",
+    footerCopyright: "© 2025 L'Oréal. Alle Rechte vorbehalten.",
+    categories: {
+      all: "Alle Kategorien",
+      cleanser: "Reiniger",
+      moisturizer: "Feuchtigkeitspflege",
+      skincare: "Hautpflege",
+      haircare: "Haarpflege",
+      "hair color": "Haarfarbe",
+      "hair styling": "Styling",
+      makeup: "Makeup",
+      suncare: "Sonnenschutz",
+      "men's grooming": "Herrenpflege",
+      fragrance: "Duft",
+    },
+  },
+};
+
+let currentLang = localStorage.getItem(LANG_STORAGE_KEY) || "en";
+
+// t() looks up a UI string in the current language, falling back to English
+// if a key is ever missing so the app never shows "undefined".
+function t(key) {
+  return translations[currentLang]?.[key] ?? translations.en[key];
+}
+
+function tCategory(categoryValue) {
+  const key = categoryValue === "" ? "all" : categoryValue;
+  return translations[currentLang]?.categories?.[key] ?? translations.en.categories[key];
+}
 
 /* ---------------------------------------------------------------------
    2) DOM REFERENCES
@@ -50,6 +318,7 @@ const generateBtn = document.getElementById("generateRoutine");
 
 const chatForm = document.getElementById("chatForm");
 const chatWindow = document.getElementById("chatWindow");
+const clearHistoryBtn = document.getElementById("clearHistoryBtn");
 const userInput = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
 
@@ -61,8 +330,7 @@ const modalDescription = document.getElementById("modalDescription");
 const modalSelectBtn = document.getElementById("modalSelectBtn");
 const modalClose = document.getElementById("modalClose");
 
-const rtlToggle = document.getElementById("rtlToggle");
-const rtlToggleLabel = document.getElementById("rtlToggleLabel");
+const langSelect = document.getElementById("langSelect");
 
 /* ---------------------------------------------------------------------
    3) STATE
@@ -127,7 +395,7 @@ function renderGrid() {
   if (filtered.length === 0) {
     productsContainer.innerHTML = `
       <div class="placeholder-message">
-        No products match your search. Try a different keyword or category.
+        ${t("noProductsMatch")}
       </div>
     `;
     return;
@@ -144,7 +412,7 @@ function renderGrid() {
           <h3 data-action="info">${product.name}</h3>
           <div class="card-actions">
             <button class="select-toggle-btn" data-action="toggle">
-              ${isSelected ? "Selected" : "Select"}
+              ${isSelected ? t("selectedBtn") : t("selectBtn")}
             </button>
             <button class="info-btn" data-action="info" aria-label="View description">
               <i class="fa-solid fa-info"></i>
@@ -216,7 +484,7 @@ function renderSelected() {
   generateBtn.disabled = selectedProducts.length === 0;
 
   if (selectedProducts.length === 0) {
-    selectedProductsList.innerHTML = `<p class="empty-note">No products selected yet.</p>`;
+    selectedProductsList.innerHTML = `<p class="empty-note">${t("noProductsSelected")}</p>`;
     return;
   }
 
@@ -263,7 +531,7 @@ function openDescriptionModal(id) {
 
 function updateModalSelectButton() {
   const isSelected = selectedIds.has(currentModalProductId);
-  modalSelectBtn.textContent = isSelected ? "Remove from Routine" : "Add to Routine";
+  modalSelectBtn.textContent = isSelected ? t("removeFromRoutine") : t("addToRoutine");
   modalSelectBtn.classList.toggle("is-selected", isSelected);
 }
 
@@ -322,7 +590,7 @@ function appendChatMessage(role, text, citations) {
 function appendLoadingMessage() {
   const bubble = document.createElement("div");
   bubble.className = "chat-message assistant loading";
-  bubble.textContent = "Thinking…";
+  bubble.textContent = t("thinking");
   chatWindow.appendChild(bubble);
   chatWindow.scrollTop = chatWindow.scrollHeight;
   return bubble;
@@ -384,7 +652,7 @@ generateBtn.addEventListener("click", async () => {
     { role: "user", content: userMessage },
   ];
 
-  appendChatMessage("user", "Generate my routine from the selected products.");
+  appendChatMessage("user", t("generateChatUserMsg"));
   const loadingBubble = appendLoadingMessage();
   generateBtn.disabled = true;
 
@@ -397,7 +665,7 @@ generateBtn.addEventListener("click", async () => {
     routineGenerated = true;
     userInput.disabled = false;
     sendBtn.disabled = false;
-    userInput.placeholder = "Ask a follow-up question about your routine…";
+    userInput.placeholder = t("chatInputAfter");
   } catch (err) {
     loadingBubble.remove();
     appendChatMessage(
@@ -445,18 +713,80 @@ chatForm.addEventListener("submit", async (e) => {
 });
 
 /* ---------------------------------------------------------------------
-   15) RTL LANGUAGE SUPPORT (LevelUp)
+   14B) CLEAR CHAT HISTORY
+   Resets the conversation completely: wipes the visible messages, the
+   conversationHistory array sent to the Worker, and locks the input
+   again until a new routine is generated.
 --------------------------------------------------------------------- */
-let isRTL = false;
+function clearChatHistory() {
+  conversationHistory = [];
+  routineGenerated = false;
 
-rtlToggle.addEventListener("click", () => {
-  isRTL = !isRTL;
-  document.documentElement.dir = isRTL ? "rtl" : "ltr";
-  rtlToggle.setAttribute("aria-pressed", String(isRTL));
-  rtlToggleLabel.textContent = isRTL ? "English" : "العربية";
-});
+  chatWindow.innerHTML = `<p class="placeholder-message" data-i18n="chatInitialPlaceholder">${t(
+    "chatInitialPlaceholder"
+  )}</p>`;
+
+  userInput.value = "";
+  userInput.disabled = true;
+  sendBtn.disabled = true;
+  updateChatInputPlaceholder();
+}
+
+clearHistoryBtn.addEventListener("click", clearChatHistory);
+
+/* ---------------------------------------------------------------------
+   15) LANGUAGE + RTL SUPPORT (LevelUp)
+   Switching languages does three things together:
+   1. Sets <html lang="…"> and flips dir="rtl"/"ltr" (Arabic + Hebrew are
+      RTL; French, Spanish, German stay LTR) — this is what reflows the
+      product grid, selected-products strip, and chat bubbles.
+   2. Replaces every static UI string (every element with [data-i18n] or
+      [data-i18n-placeholder]) with the translated text.
+   3. Re-renders the dynamic pieces (grid, selected list, category
+      options, chat input placeholder) so their button/option text is
+      translated too — those aren't static, so a plain textContent swap
+      wouldn't reach them.
+--------------------------------------------------------------------- */
+function updateStaticText() {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+  document.querySelectorAll("#categoryFilter option[data-i18n-cat]").forEach((opt) => {
+    opt.textContent = tCategory(opt.dataset.i18nCat === "all" ? "" : opt.dataset.i18nCat);
+  });
+}
+
+function updateChatInputPlaceholder() {
+  userInput.placeholder = routineGenerated ? t("chatInputAfter") : t("chatInputBefore");
+}
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_STORAGE_KEY, lang);
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
+
+  updateStaticText();
+  updateChatInputPlaceholder();
+  if (!modal.hidden) updateModalSelectButton();
+
+  // Re-render dynamic sections so Select/Selected buttons, the "no
+  // results" message, etc. pick up the new language too.
+  if (allProducts.length > 0) {
+    renderGrid();
+    renderSelected();
+  }
+}
+
+langSelect.addEventListener("change", (e) => applyLanguage(e.target.value));
 
 /* ---------------------------------------------------------------------
    16) INIT
 --------------------------------------------------------------------- */
+langSelect.value = currentLang;
+applyLanguage(currentLang);
 loadProducts();

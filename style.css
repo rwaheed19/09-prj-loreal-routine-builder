@@ -63,25 +63,39 @@ h1, h2, h3 {
   object-fit: contain;
 }
 
-.rtl-toggle {
+.lang-switcher {
   display: flex;
   align-items: center;
   gap: 8px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 8px 16px;
+  padding: 8px 14px;
+  transition: border-color 0.2s;
+}
+
+.lang-switcher:focus-within,
+.lang-switcher:hover {
+  border-color: var(--gold);
+}
+
+.lang-switcher i {
+  color: var(--gold);
+  font-size: 13px;
+}
+
+.lang-switcher select {
+  border: none;
+  background: transparent;
+  font-family: inherit;
   font-size: 13px;
   font-weight: 500;
   color: var(--ink);
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
 }
 
-.rtl-toggle:hover,
-.rtl-toggle[aria-pressed="true"] {
-  border-color: var(--gold);
-  color: var(--red-deep);
+.lang-switcher select:focus {
+  outline: none;
 }
 
 .eyebrow {
@@ -480,6 +494,17 @@ h1, h2, h3 {
   margin-bottom: 18px;
 }
 
+.chatbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.chatbox-header h2 {
+  margin-bottom: 0;
+}
+
 .chat-window {
   padding: 20px;
   font-size: 15px;
@@ -588,7 +613,7 @@ h1, h2, h3 {
 .chat-form button:focus-visible,
 .select-toggle-btn:focus-visible,
 .info-btn:focus-visible,
-.rtl-toggle:focus-visible,
+.lang-switcher select:focus-visible,
 .generate-btn:focus-visible {
   outline: 2px solid var(--red-deep);
   outline-offset: 2px;
