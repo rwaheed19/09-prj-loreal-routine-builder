@@ -4,16 +4,29 @@
 =================================================================== */
 :root {
   --red: #ff003b;
+  --red-mid: #d80038; /* darker stop for the red gradient/selected states — pure --red fails 4.5:1 with white text */
   --red-deep: #c40030;
   --gold: #e3a535;
+  --gold-text: #7a5415; /* darker gold for text/icons on light backgrounds — meets WCAG AA contrast, unlike raw --gold */
   --gold-soft: #f3d9a4;
   --ink: #201c19;
-  --muted: #8a8078;
+  --muted: #54473e; /* darker neutral for small text on cream backgrounds */
   --cream: #faf6ef;
   --surface: #ffffff;
   --line: #e9e2d4;
   --shadow: 0 12px 30px rgba(32, 28, 25, 0.08);
   --radius: 14px;
+}
+
+/* Respect users who've asked for reduced motion: turn off decorative
+   transforms/transitions site-wide instead of just hiding them by accident */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* —— reset —— */
@@ -38,7 +51,9 @@ body {
   padding-bottom: 40px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Playfair Display", Georgia, serif;
 }
 
@@ -104,7 +119,7 @@ h1, h2, h3 {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--ink);
 }
 
 .site-title {
@@ -159,6 +174,11 @@ h1, h2, h3 {
   color: var(--muted);
 }
 
+.search-field:focus-within {
+  outline: none;
+  border-color: var(--gold);
+}
+
 .search-field input {
   flex: 1;
   border: none;
@@ -173,8 +193,18 @@ h1, h2, h3 {
   outline: none;
 }
 
-#categoryFilter {
-  flex: 0 1 220px;
+.custom-select {
+  position: relative;
+  flex: 0 1 240px;
+  min-width: 200px;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   padding: 14px 18px;
   font-size: 15px;
   font-family: inherit;
@@ -184,12 +214,69 @@ h1, h2, h3 {
   background: var(--surface);
   color: var(--ink);
   cursor: pointer;
+  text-align: start;
 }
 
-#categoryFilter:focus,
-.search-field:focus-within {
-  outline: none;
+.custom-select-trigger i {
+  color: var(--muted);
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.custom-select-trigger[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.custom-select-trigger:hover,
+.custom-select-trigger[aria-expanded="true"] {
   border-color: var(--gold);
+}
+
+.custom-select-trigger:focus-visible {
+  outline: 2px solid var(--red-deep);
+  outline-offset: 2px;
+}
+
+/* The key fix: width is tied to the trigger (100%, via the wrapper), never
+   to the length of the longest option, so it can't spill past the layout
+   on tablet or mobile the way a native <select> popup can. */
+.custom-select-list {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  inset-inline-start: 0;
+  width: 100%;
+  max-width: calc(100vw - 40px);
+  max-height: 280px;
+  overflow-y: auto;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 6px;
+}
+
+.custom-select-list[hidden] {
+  display: none;
+}
+
+.custom-select-list li {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.custom-select-list li.is-active {
+  background: var(--cream);
+}
+
+.custom-select-list li[aria-selected="true"] {
+  font-weight: 700;
+  color: var(--red-deep);
 }
 
 /* ===================================================================
@@ -219,7 +306,10 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 
 .product-card:hover {
@@ -264,7 +354,7 @@ h1, h2, h3 {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--ink);
 }
 
 .product-card h3 {
@@ -291,7 +381,10 @@ h1, h2, h3 {
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
 }
 
 .product-card.selected .select-toggle-btn {
@@ -310,7 +403,9 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s, color 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
 }
 
 .info-btn:hover {
@@ -348,7 +443,7 @@ h1, h2, h3 {
   font-size: 12px;
   font-weight: 700;
   background: var(--gold-soft);
-  color: var(--red-deep);
+  color: var(--ink);
   border-radius: 999px;
   padding: 3px 10px;
 }
@@ -359,7 +454,7 @@ h1, h2, h3 {
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--ink);
   text-decoration: underline;
   cursor: pointer;
 }
@@ -442,11 +537,13 @@ h1, h2, h3 {
   font-family: inherit;
   letter-spacing: 0.02em;
   color: #fff;
-  background: linear-gradient(120deg, var(--red-deep), var(--red));
+  background: linear-gradient(120deg, var(--red-deep), var(--red-mid));
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  transition: transform 0.15s, opacity 0.2s;
+  transition:
+    transform 0.15s,
+    opacity 0.2s;
 }
 
 .generate-btn i {
@@ -460,7 +557,12 @@ h1, h2, h3 {
   inset-inline-start: -60%;
   width: 40%;
   height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
   transform: skewX(-20deg);
   transition: left 0.6s ease;
 }
@@ -685,7 +787,7 @@ h1, h2, h3 {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--ink);
   margin-bottom: 6px;
 }
 
@@ -714,7 +816,7 @@ h1, h2, h3 {
 }
 
 .modal-select-btn.is-selected {
-  background: var(--red);
+  background: var(--red-mid);
 }
 
 /* ===================================================================
@@ -759,8 +861,51 @@ h1, h2, h3 {
     font-size: 30px;
   }
 
+  .header-top {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .selected-header,
+  .chatbox-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
   .search-section {
     flex-direction: column;
+  }
+
+  /* This is the actual fix for the "oval blob" bug: once flex-direction
+     becomes column, flex-basis applies to HEIGHT instead of width, so the
+     260px/220px basis values from the desktop layout were stretching the
+     search bar and category select into tall pill/ellipse shapes. Resetting
+     to `auto` lets each control size to its own content height again, and
+     width: 100% keeps it filling the column. */
+  .search-field,
+  .custom-select {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .chat-window {
+    height: 260px;
+  }
+}
+
+/* Small phones (very narrow) — a bit more breathing room removed */
+@media (max-width: 360px) {
+  .page-wrapper {
+    width: 94%;
+  }
+
+  .site-title {
+    font-size: 26px;
+  }
+
+  .modal-image {
+    width: 96px;
+    height: 96px;
   }
 }
 

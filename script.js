@@ -52,24 +52,30 @@ const translations = {
     subtitle:
       "Choose real products from our family of brands and let your advisor craft a routine built around them.",
     searchPlaceholder: "Search by product or brand…",
+    categoryFilterLabel: "Filter by category",
     selectedProductsHeading: "Selected Products",
     clearAll: "Clear All",
     generateBtn: "Generate Routine",
     chatHeading: "Ask Your Advisor",
     clearHistory: "Clear History",
-    chatInitialPlaceholder: "Select a few products above and generate your routine to start the conversation.",
+    chatInitialPlaceholder:
+      "Select a few products above and generate your routine to start the conversation.",
     chatInputBefore: "Generate a routine first, then ask a follow-up question…",
     chatInputAfter: "Ask a follow-up question about your routine…",
     selectBtn: "Select",
     selectedBtn: "Selected",
+    viewDescriptionFor: "View description for",
     addToRoutine: "Add to Routine",
     removeFromRoutine: "Remove from Routine",
     noProductsSelected: "No products selected yet.",
-    noProductsMatch: "No products match your search. Try a different keyword or category.",
+    noProductsMatch:
+      "No products match your search. Try a different keyword or category.",
     privacy: "Privacy Policy",
     terms: "Terms of Use",
     contact: "Contact",
     generateChatUserMsg: "Generate my routine from the selected products.",
+    continuePrompt:
+      "Please continue exactly where you left off. Do not repeat any text you already sent.",
     thinking: "Thinking…",
     footerCopyright: "© 2025 L'Oréal. All rights reserved.",
     categories: {
@@ -90,18 +96,22 @@ const translations = {
     languageLabel: "اللغة",
     eyebrow: "جمال شخصي، مدعوم بالذكاء الاصطناعي",
     title: "منشئ روتينك الخاص",
-    subtitle: "اختر منتجات حقيقية من مجموعة علاماتنا التجارية، ودع مستشارك يصمم لك روتينًا يناسبها.",
+    subtitle:
+      "اختر منتجات حقيقية من مجموعة علاماتنا التجارية، ودع مستشارك يصمم لك روتينًا يناسبها.",
     searchPlaceholder: "ابحث عن منتج أو علامة تجارية…",
+    categoryFilterLabel: "تصفية حسب الفئة",
     selectedProductsHeading: "المنتجات المختارة",
     clearAll: "مسح الكل",
     generateBtn: "إنشاء الروتين",
     chatHeading: "اسأل مستشارك",
     clearHistory: "مسح المحادثة",
-    chatInitialPlaceholder: "اختر بعض المنتجات أعلاه وأنشئ روتينك لبدء المحادثة.",
+    chatInitialPlaceholder:
+      "اختر بعض المنتجات أعلاه وأنشئ روتينك لبدء المحادثة.",
     chatInputBefore: "أنشئ روتينًا أولًا، ثم اطرح سؤال متابعة…",
     chatInputAfter: "اطرح سؤال متابعة حول روتينك…",
     selectBtn: "اختيار",
     selectedBtn: "تم الاختيار",
+    viewDescriptionFor: "عرض وصف",
     addToRoutine: "أضف إلى الروتين",
     removeFromRoutine: "إزالة من الروتين",
     noProductsSelected: "لم يتم اختيار أي منتجات بعد.",
@@ -110,6 +120,8 @@ const translations = {
     terms: "شروط الاستخدام",
     contact: "اتصل بنا",
     generateChatUserMsg: "أنشئ روتيني من المنتجات المختارة.",
+    continuePrompt:
+      "يرجى المتابعة من حيث توقفت تمامًا. لا تكرر أي نص أرسلته سابقًا.",
     thinking: "جارٍ التفكير…",
     footerCopyright: "© 2025 لوريال. جميع الحقوق محفوظة.",
     categories: {
@@ -130,8 +142,10 @@ const translations = {
     languageLabel: "שפה",
     eyebrow: "יופי מותאם אישית, מופעל בבינה מלאכותית",
     title: "בונה השגרה שלך",
-    subtitle: "בחרו מוצרים אמיתיים ממשפחת המותגים שלנו, והיועץ שלכם יבנה עבורכם שגרה מותאמת.",
+    subtitle:
+      "בחרו מוצרים אמיתיים ממשפחת המותגים שלנו, והיועץ שלכם יבנה עבורכם שגרה מותאמת.",
     searchPlaceholder: "חיפוש לפי מוצר או מותג…",
+    categoryFilterLabel: "סינון לפי קטגוריה",
     selectedProductsHeading: "מוצרים נבחרים",
     clearAll: "נקה הכול",
     generateBtn: "צור שגרה",
@@ -142,6 +156,7 @@ const translations = {
     chatInputAfter: "שאלו שאלת המשך על השגרה שלכם…",
     selectBtn: "בחר",
     selectedBtn: "נבחר",
+    viewDescriptionFor: "הצג תיאור עבור",
     addToRoutine: "הוסף לשגרה",
     removeFromRoutine: "הסר מהשגרה",
     noProductsSelected: "עדיין לא נבחרו מוצרים.",
@@ -150,6 +165,8 @@ const translations = {
     terms: "תנאי שימוש",
     contact: "צור קשר",
     generateChatUserMsg: "צור את השגרה שלי מהמוצרים שנבחרו.",
+    continuePrompt:
+      "אנא המשך בדיוק מהמקום שבו הפסקת. אל תחזור על טקסט ששלחת כבר.",
     thinking: "חושב…",
     footerCopyright: "© 2025 לוריאל. כל הזכויות שמורות.",
     categories: {
@@ -173,24 +190,31 @@ const translations = {
     subtitle:
       "Choisissez de vrais produits parmi nos marques et laissez votre conseiller créer une routine sur mesure.",
     searchPlaceholder: "Rechercher un produit ou une marque…",
+    categoryFilterLabel: "Filtrer par catégorie",
     selectedProductsHeading: "Produits sélectionnés",
     clearAll: "Tout effacer",
     generateBtn: "Générer la routine",
     chatHeading: "Interrogez votre conseiller",
     clearHistory: "Effacer l'historique",
-    chatInitialPlaceholder: "Sélectionnez quelques produits ci-dessus et générez votre routine pour démarrer la conversation.",
+    chatInitialPlaceholder:
+      "Sélectionnez quelques produits ci-dessus et générez votre routine pour démarrer la conversation.",
     chatInputBefore: "Générez d'abord une routine, puis posez une question…",
     chatInputAfter: "Posez une question sur votre routine…",
     selectBtn: "Sélectionner",
     selectedBtn: "Sélectionné",
+    viewDescriptionFor: "Voir la description de",
     addToRoutine: "Ajouter à la routine",
     removeFromRoutine: "Retirer de la routine",
     noProductsSelected: "Aucun produit sélectionné pour l'instant.",
-    noProductsMatch: "Aucun produit ne correspond à votre recherche. Essayez un autre mot-clé ou une autre catégorie.",
+    noProductsMatch:
+      "Aucun produit ne correspond à votre recherche. Essayez un autre mot-clé ou une autre catégorie.",
     privacy: "Politique de confidentialité",
     terms: "Conditions d'utilisation",
     contact: "Contact",
-    generateChatUserMsg: "Génère ma routine à partir des produits sélectionnés.",
+    generateChatUserMsg:
+      "Génère ma routine à partir des produits sélectionnés.",
+    continuePrompt:
+      "Merci de continuer exactement là où tu t'es arrêté. Ne répète aucun texte déjà envoyé.",
     thinking: "Réflexion en cours…",
     footerCopyright: "© 2025 L'Oréal. Tous droits réservés.",
     categories: {
@@ -214,24 +238,31 @@ const translations = {
     subtitle:
       "Elige productos reales de nuestra familia de marcas y deja que tu asesor cree una rutina a tu medida.",
     searchPlaceholder: "Buscar por producto o marca…",
+    categoryFilterLabel: "Filtrar por categoría",
     selectedProductsHeading: "Productos seleccionados",
     clearAll: "Borrar todo",
     generateBtn: "Generar rutina",
     chatHeading: "Consulta a tu asesor",
     clearHistory: "Borrar historial",
-    chatInitialPlaceholder: "Selecciona algunos productos arriba y genera tu rutina para comenzar la conversación.",
+    chatInitialPlaceholder:
+      "Selecciona algunos productos arriba y genera tu rutina para comenzar la conversación.",
     chatInputBefore: "Genera primero una rutina y luego haz una pregunta…",
     chatInputAfter: "Haz una pregunta sobre tu rutina…",
     selectBtn: "Seleccionar",
     selectedBtn: "Seleccionado",
+    viewDescriptionFor: "Ver descripción de",
     addToRoutine: "Añadir a la rutina",
     removeFromRoutine: "Quitar de la rutina",
     noProductsSelected: "Aún no has seleccionado productos.",
-    noProductsMatch: "Ningún producto coincide con tu búsqueda. Prueba otra palabra clave o categoría.",
+    noProductsMatch:
+      "Ningún producto coincide con tu búsqueda. Prueba otra palabra clave o categoría.",
     privacy: "Política de privacidad",
     terms: "Términos de uso",
     contact: "Contacto",
-    generateChatUserMsg: "Genera mi rutina a partir de los productos seleccionados.",
+    generateChatUserMsg:
+      "Genera mi rutina a partir de los productos seleccionados.",
+    continuePrompt:
+      "Por favor continúa exactamente donde lo dejaste. No repitas ningún texto que ya enviaste.",
     thinking: "Pensando…",
     footerCopyright: "© 2025 L'Oréal. Todos los derechos reservados.",
     categories: {
@@ -255,24 +286,31 @@ const translations = {
     subtitle:
       "Wähle echte Produkte aus unserer Markenfamilie und lass deinen Berater eine passende Routine zusammenstellen.",
     searchPlaceholder: "Nach Produkt oder Marke suchen…",
+    categoryFilterLabel: "Nach Kategorie filtern",
     selectedProductsHeading: "Ausgewählte Produkte",
     clearAll: "Alle löschen",
     generateBtn: "Routine erstellen",
     chatHeading: "Frag deinen Berater",
     clearHistory: "Verlauf löschen",
-    chatInitialPlaceholder: "Wähle oben ein paar Produkte aus und erstelle deine Routine, um das Gespräch zu beginnen.",
+    chatInitialPlaceholder:
+      "Wähle oben ein paar Produkte aus und erstelle deine Routine, um das Gespräch zu beginnen.",
     chatInputBefore: "Erstelle zuerst eine Routine und stelle dann eine Frage…",
     chatInputAfter: "Stelle eine Frage zu deiner Routine…",
     selectBtn: "Auswählen",
     selectedBtn: "Ausgewählt",
+    viewDescriptionFor: "Beschreibung ansehen für",
     addToRoutine: "Zur Routine hinzufügen",
     removeFromRoutine: "Aus der Routine entfernen",
     noProductsSelected: "Noch keine Produkte ausgewählt.",
-    noProductsMatch: "Keine Produkte entsprechen deiner Suche. Versuche ein anderes Stichwort oder eine andere Kategorie.",
+    noProductsMatch:
+      "Keine Produkte entsprechen deiner Suche. Versuche ein anderes Stichwort oder eine andere Kategorie.",
     privacy: "Datenschutzrichtlinie",
     terms: "Nutzungsbedingungen",
     contact: "Kontakt",
-    generateChatUserMsg: "Erstelle meine Routine aus den ausgewählten Produkten.",
+    generateChatUserMsg:
+      "Erstelle meine Routine aus den ausgewählten Produkten.",
+    continuePrompt:
+      "Bitte fahre genau dort fort, wo du aufgehört hast. Wiederhole keinen bereits gesendeten Text.",
     thinking: "Denke nach…",
     footerCopyright: "© 2025 L'Oréal. Alle Rechte vorbehalten.",
     categories: {
@@ -301,15 +339,22 @@ function t(key) {
 
 function tCategory(categoryValue) {
   const key = categoryValue === "" ? "all" : categoryValue;
-  return translations[currentLang]?.categories?.[key] ?? translations.en.categories[key];
+  return (
+    translations[currentLang]?.categories?.[key] ??
+    translations.en.categories[key]
+  );
 }
 
 /* ---------------------------------------------------------------------
    2) DOM REFERENCES
 --------------------------------------------------------------------- */
-const categoryFilter = document.getElementById("categoryFilter");
+const categoryFilterWrap = document.getElementById("categoryFilterWrap");
+const categoryTrigger = document.getElementById("categoryTrigger");
+const categoryTriggerLabel = document.getElementById("categoryTriggerLabel");
+const categoryListbox = document.getElementById("categoryListbox");
 const productSearch = document.getElementById("productSearch");
 const productsContainer = document.getElementById("productsContainer");
+const mainContent = document.querySelector("main.site-main");
 
 const selectedProductsList = document.getElementById("selectedProductsList");
 const selectedCount = document.getElementById("selectedCount");
@@ -340,6 +385,23 @@ let selectedIds = loadSelectedIdsFromStorage(); // Set of selected product ids
 let conversationHistory = []; // { role: "system"|"user"|"assistant", content: "" }
 let routineGenerated = false;
 let currentModalProductId = null;
+let selectedCategory = ""; // "" means All Categories
+let categoryActiveIndex = 0; // which option is highlighted while the listbox is open
+
+// Order matters here — this drives both the listbox and the "all" option.
+const CATEGORY_KEYS = [
+  "",
+  "cleanser",
+  "moisturizer",
+  "skincare",
+  "haircare",
+  "hair color",
+  "hair styling",
+  "makeup",
+  "suncare",
+  "men's grooming",
+  "fragrance",
+];
 
 /* ---------------------------------------------------------------------
    4) LOAD PRODUCT DATA
@@ -373,7 +435,7 @@ function saveSelectedIdsToStorage() {
    6) FILTERING (category dropdown + search field work together)
 --------------------------------------------------------------------- */
 function getFilteredProducts() {
-  const category = categoryFilter.value;
+  const category = selectedCategory;
   const query = productSearch.value.trim().toLowerCase();
 
   return allProducts.filter((product) => {
@@ -385,6 +447,137 @@ function getFilteredProducts() {
     return matchesCategory && matchesSearch;
   });
 }
+
+/* ---------------------------------------------------------------------
+   6B) CUSTOM CATEGORY DROPDOWN (accessible listbox, not a native <select>)
+   Follows the ARIA "listbox popup" pattern: a button toggles a list of
+   role="listbox" options. Because we render and position this ourselves,
+   its width is always tied to the trigger button (see .custom-select-list
+   in style.css), so it can never spill past the viewport the way a native
+   <select> popup can on tablet/mobile.
+--------------------------------------------------------------------- */
+function renderCategoryOptions() {
+  categoryListbox.innerHTML = CATEGORY_KEYS.map((key, index) => {
+    const isSelected = key === selectedCategory;
+    return `
+      <li
+        id="cat-opt-${index}"
+        role="option"
+        data-value="${key}"
+        aria-selected="${isSelected}"
+      >
+        ${tCategory(key)}
+      </li>
+    `;
+  }).join("");
+  updateCategoryTriggerLabel();
+}
+
+function updateCategoryTriggerLabel() {
+  categoryTriggerLabel.textContent = tCategory(selectedCategory);
+}
+
+function getCategoryOptionEls() {
+  return Array.from(categoryListbox.querySelectorAll("li"));
+}
+
+function highlightCategoryOption(index) {
+  const options = getCategoryOptionEls();
+  options.forEach((opt) => opt.classList.remove("is-active"));
+  categoryActiveIndex = (index + options.length) % options.length;
+  const active = options[categoryActiveIndex];
+  active.classList.add("is-active");
+  categoryListbox.setAttribute("aria-activedescendant", active.id);
+}
+
+function openCategoryListbox() {
+  categoryListbox.hidden = false;
+  categoryListbox.setAttribute("aria-hidden", "false");
+  categoryTrigger.setAttribute("aria-expanded", "true");
+  const selectedIndex = CATEGORY_KEYS.indexOf(selectedCategory);
+  highlightCategoryOption(selectedIndex === -1 ? 0 : selectedIndex);
+  categoryListbox.focus();
+  document.addEventListener("click", handleCategoryOutsideClick);
+}
+
+function closeCategoryListbox(returnFocusToTrigger) {
+  categoryListbox.hidden = true;
+  categoryListbox.setAttribute("aria-hidden", "true");
+  categoryTrigger.setAttribute("aria-expanded", "false");
+  categoryListbox.removeAttribute("aria-activedescendant");
+  document.removeEventListener("click", handleCategoryOutsideClick);
+  if (returnFocusToTrigger) categoryTrigger.focus();
+}
+
+function handleCategoryOutsideClick(e) {
+  if (!categoryFilterWrap.contains(e.target)) closeCategoryListbox(false);
+}
+
+function chooseCategory(value) {
+  selectedCategory = value;
+  updateCategoryTriggerLabel();
+  getCategoryOptionEls().forEach((opt) => {
+    opt.setAttribute("aria-selected", String(opt.dataset.value === value));
+  });
+  renderGrid();
+  closeCategoryListbox(true);
+}
+
+categoryTrigger.addEventListener("click", () => {
+  if (categoryListbox.hidden) {
+    openCategoryListbox();
+  } else {
+    closeCategoryListbox(false);
+  }
+});
+
+categoryTrigger.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+    e.preventDefault();
+    openCategoryListbox();
+  }
+});
+
+categoryListbox.addEventListener("click", (e) => {
+  const option = e.target.closest("li[role='option']");
+  if (option) chooseCategory(option.dataset.value);
+});
+
+categoryListbox.addEventListener("keydown", (e) => {
+  const options = getCategoryOptionEls();
+  switch (e.key) {
+    case "ArrowDown":
+      e.preventDefault();
+      highlightCategoryOption(categoryActiveIndex + 1);
+      break;
+    case "ArrowUp":
+      e.preventDefault();
+      highlightCategoryOption(categoryActiveIndex - 1);
+      break;
+    case "Home":
+      e.preventDefault();
+      highlightCategoryOption(0);
+      break;
+    case "End":
+      e.preventDefault();
+      highlightCategoryOption(options.length - 1);
+      break;
+    case "Enter":
+    case " ":
+      e.preventDefault();
+      chooseCategory(options[categoryActiveIndex].dataset.value);
+      break;
+    case "Escape":
+      e.preventDefault();
+      closeCategoryListbox(true);
+      break;
+    case "Tab":
+      closeCategoryListbox(false);
+      break;
+    default:
+      break;
+  }
+});
 
 /* ---------------------------------------------------------------------
    7) RENDER: PRODUCT GRID
@@ -411,11 +604,22 @@ function renderGrid() {
           <p class="card-brand">${product.brand}</p>
           <h3 data-action="info">${product.name}</h3>
           <div class="card-actions">
-            <button class="select-toggle-btn" data-action="toggle">
+            <button
+              type="button"
+              class="select-toggle-btn"
+              data-action="toggle"
+              aria-pressed="${isSelected}"
+              aria-label="${isSelected ? t("selectedBtn") : t("selectBtn")} ${product.name}"
+            >
               ${isSelected ? t("selectedBtn") : t("selectBtn")}
             </button>
-            <button class="info-btn" data-action="info" aria-label="View description">
-              <i class="fa-solid fa-info"></i>
+            <button
+              type="button"
+              class="info-btn"
+              data-action="info"
+              aria-label="${t("viewDescriptionFor")} ${product.name}"
+            >
+              <i class="fa-solid fa-info" aria-hidden="true"></i>
             </button>
           </div>
         </div>
@@ -435,13 +639,11 @@ productsContainer.addEventListener("click", (e) => {
 
   if (action === "info") {
     openDescriptionModal(id);
-  } else {
-    // Clicking anywhere else on the card also toggles selection.
+  } else if (action === "toggle") {
     toggleSelected(id);
   }
 });
 
-categoryFilter.addEventListener("change", renderGrid);
 productSearch.addEventListener("input", renderGrid);
 
 /* ---------------------------------------------------------------------
@@ -484,21 +686,21 @@ function renderSelected() {
   generateBtn.disabled = selectedProducts.length === 0;
 
   if (selectedProducts.length === 0) {
-    selectedProductsList.innerHTML = `<p class="empty-note">${t("noProductsSelected")}</p>`;
+    selectedProductsList.innerHTML = `<li role="none" class="empty-note">${t("noProductsSelected")}</li>`;
     return;
   }
 
   selectedProductsList.innerHTML = selectedProducts
     .map(
       (product) => `
-      <div class="selected-chip" data-id="${product.id}">
+      <li class="selected-chip" role="listitem" data-id="${product.id}">
         <img src="${product.image}" alt="${product.name}" />
         <span>${product.name}</span>
-        <button data-action="remove" aria-label="Remove ${product.name}">
-          <i class="fa-solid fa-xmark"></i>
+        <button type="button" data-action="remove" aria-label="Remove ${product.name}">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
-      </div>
-    `
+      </li>
+    `,
     )
     .join("");
 }
@@ -513,10 +715,13 @@ selectedProductsList.addEventListener("click", (e) => {
 /* ---------------------------------------------------------------------
    10) DESCRIPTION MODAL (Reveal Product Description)
 --------------------------------------------------------------------- */
+let lastFocusedBeforeModal = null;
+
 function openDescriptionModal(id) {
   const product = allProducts.find((p) => p.id === id);
   if (!product) return;
 
+  lastFocusedBeforeModal = document.activeElement;
   currentModalProductId = id;
   modalImage.src = product.image;
   modalImage.alt = product.name;
@@ -526,18 +731,36 @@ function openDescriptionModal(id) {
   updateModalSelectButton();
 
   modal.hidden = false;
+  modal.setAttribute("aria-hidden", "false");
+  if (mainContent) {
+    mainContent.setAttribute("aria-hidden", "true");
+  }
   modalClose.focus();
 }
 
 function updateModalSelectButton() {
   const isSelected = selectedIds.has(currentModalProductId);
-  modalSelectBtn.textContent = isSelected ? t("removeFromRoutine") : t("addToRoutine");
+  modalSelectBtn.textContent = isSelected
+    ? t("removeFromRoutine")
+    : t("addToRoutine");
   modalSelectBtn.classList.toggle("is-selected", isSelected);
 }
 
 function closeModal() {
   modal.hidden = true;
+  modal.setAttribute("aria-hidden", "true");
+  if (mainContent) {
+    mainContent.removeAttribute("aria-hidden");
+  }
   currentModalProductId = null;
+  // Send focus back to whatever the user was on before opening the modal
+  // (usually the info button on the product card) instead of dropping it.
+  if (
+    lastFocusedBeforeModal &&
+    document.body.contains(lastFocusedBeforeModal)
+  ) {
+    lastFocusedBeforeModal.focus();
+  }
 }
 
 modalClose.addEventListener("click", closeModal);
@@ -546,6 +769,31 @@ modal.addEventListener("click", (e) => {
 });
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !modal.hidden) closeModal();
+});
+
+// Keep keyboard focus trapped inside the modal while it's open (Tab/Shift+Tab
+// cycle through its own controls instead of escaping to the page behind it).
+modal.addEventListener("keydown", (e) => {
+  if (e.key !== "Tab" || modal.hidden) return;
+
+  const focusable = Array.from(
+    modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter((el) => !el.disabled && el.offsetParent !== null);
+
+  if (focusable.length === 0) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
 });
 
 modalSelectBtn.addEventListener("click", () => {
@@ -615,14 +863,62 @@ async function callWorker(messages) {
   // Different Worker setups shape their response a little differently.
   // This covers the standard OpenAI chat-completions shape, and falls
   // back gracefully if your Worker returns something slightly different.
-  const message = data.choices?.[0]?.message;
-  const text = message?.content ?? data.reply ?? "Sorry, I couldn't generate a response.";
+  const choice = data.choices?.[0];
+  const message = choice?.message;
+  const text =
+    message?.content ?? data.reply ?? "Sorry, I couldn't generate a response.";
 
   // LevelUp: Web Search — adjust this line to match whatever field your
   // web-search-enabled Worker returns (e.g. data.citations, message.citations).
   const citations = data.citations || message?.citations || [];
 
-  return { text, citations };
+  // "length" means the model ran out of tokens mid-reply (OpenAI's chat
+  // completions shape reports this on choice.finish_reason). We use this
+  // to auto-continue the response below instead of showing a cut-off reply.
+  const finishReason = choice?.finish_reason ?? data.finish_reason ?? null;
+
+  return { text, citations, finishReason };
+}
+
+// Heuristic fallback for Workers that don't forward finish_reason at all:
+// a real, complete reply almost always ends in sentence-ending punctuation
+// (or closes a markdown list/code block). If it just stops mid-word or
+// mid-clause, treat it as likely truncated.
+function looksTruncated(text) {
+  const trimmed = text.trim();
+  if (!trimmed) return false;
+  return !/[.!?:"'\)\]，。！？]$/.test(trimmed);
+}
+
+const MAX_AUTO_CONTINUATIONS = 3;
+
+// Wraps callWorker so a reply that got cut off (hit the token limit) is
+// automatically continued and stitched together into one complete message,
+// instead of showing the user a response that stops mid-sentence.
+async function callWorkerWithContinuation(messages) {
+  let workingMessages = [...messages];
+  let combinedText = "";
+  let citations = [];
+
+  for (let attempt = 0; attempt <= MAX_AUTO_CONTINUATIONS; attempt++) {
+    const result = await callWorker(workingMessages);
+    combinedText += result.text;
+    if (citations.length === 0) citations = result.citations;
+
+    const wasTruncated =
+      result.finishReason === "length" ||
+      (!result.finishReason && looksTruncated(result.text));
+
+    if (!wasTruncated || attempt === MAX_AUTO_CONTINUATIONS) break;
+
+    workingMessages = [
+      ...workingMessages,
+      { role: "assistant", content: result.text },
+      { role: "user", content: t("continuePrompt") },
+    ];
+  }
+
+  return { text: combinedText, citations };
 }
 
 /* ---------------------------------------------------------------------
@@ -633,17 +929,19 @@ generateBtn.addEventListener("click", async () => {
   if (selectedProducts.length === 0) return;
 
   // Only send the fields the AI actually needs — keeps the request small.
-  const productData = selectedProducts.map(({ name, brand, category, description }) => ({
-    name,
-    brand,
-    category,
-    description,
-  }));
+  const productData = selectedProducts.map(
+    ({ name, brand, category, description }) => ({
+      name,
+      brand,
+      category,
+      description,
+    }),
+  );
 
   const userMessage = `Please build a personalized routine using these selected products:\n${JSON.stringify(
     productData,
     null,
-    2
+    2,
   )}`;
 
   // Start (or restart) the conversation history with the system prompt.
@@ -657,7 +955,8 @@ generateBtn.addEventListener("click", async () => {
   generateBtn.disabled = true;
 
   try {
-    const { text, citations } = await callWorker(conversationHistory);
+    const { text, citations } =
+      await callWorkerWithContinuation(conversationHistory);
     conversationHistory.push({ role: "assistant", content: text });
     loadingBubble.remove();
     appendChatMessage("assistant", text, citations);
@@ -670,7 +969,7 @@ generateBtn.addEventListener("click", async () => {
     loadingBubble.remove();
     appendChatMessage(
       "assistant",
-      "Something went wrong reaching the advisor. Please check your Cloudflare Worker URL and try again."
+      "Something went wrong reaching the advisor. Please check your Cloudflare Worker URL and try again.",
     );
     console.error(err);
   } finally {
@@ -697,13 +996,17 @@ chatForm.addEventListener("submit", async (e) => {
   sendBtn.disabled = true;
 
   try {
-    const { text, citations } = await callWorker(conversationHistory);
+    const { text, citations } =
+      await callWorkerWithContinuation(conversationHistory);
     conversationHistory.push({ role: "assistant", content: text });
     loadingBubble.remove();
     appendChatMessage("assistant", text, citations);
   } catch (err) {
     loadingBubble.remove();
-    appendChatMessage("assistant", "I had trouble reaching the advisor. Please try again.");
+    appendChatMessage(
+      "assistant",
+      "I had trouble reaching the advisor. Please try again.",
+    );
     console.error(err);
   } finally {
     userInput.disabled = false;
@@ -723,7 +1026,7 @@ function clearChatHistory() {
   routineGenerated = false;
 
   chatWindow.innerHTML = `<p class="placeholder-message" data-i18n="chatInitialPlaceholder">${t(
-    "chatInitialPlaceholder"
+    "chatInitialPlaceholder",
   )}</p>`;
 
   userInput.value = "";
@@ -754,13 +1057,12 @@ function updateStaticText() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
     el.placeholder = t(el.dataset.i18nPlaceholder);
   });
-  document.querySelectorAll("#categoryFilter option[data-i18n-cat]").forEach((opt) => {
-    opt.textContent = tCategory(opt.dataset.i18nCat === "all" ? "" : opt.dataset.i18nCat);
-  });
 }
 
 function updateChatInputPlaceholder() {
-  userInput.placeholder = routineGenerated ? t("chatInputAfter") : t("chatInputBefore");
+  userInput.placeholder = routineGenerated
+    ? t("chatInputAfter")
+    : t("chatInputBefore");
 }
 
 function applyLanguage(lang) {
@@ -772,6 +1074,7 @@ function applyLanguage(lang) {
 
   updateStaticText();
   updateChatInputPlaceholder();
+  renderCategoryOptions();
   if (!modal.hidden) updateModalSelectButton();
 
   // Re-render dynamic sections so Select/Selected buttons, the "no

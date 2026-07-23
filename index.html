@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
@@ -20,18 +20,22 @@
 
   <body>
     <div class="page-wrapper">
-
       <!-- ======================= HEADER ======================= -->
       <header class="site-header">
         <div class="header-top">
-          
+          <!-- Add your L'Oréal logo image here, e.g. img/loreal-logo.png -->
           <img src="img/loreal-logo.png" alt="L'Oréal" class="logo" />
 
           <!-- RTL Language Support (LevelUp): real translation + direction switch,
                not just a font-direction flip. Includes both RTL and LTR languages. -->
           <div class="lang-switcher">
             <i class="fa-solid fa-globe" aria-hidden="true"></i>
-            <label for="langSelect" class="visually-hidden" data-i18n="languageLabel">Language</label>
+            <label
+              for="langSelect"
+              class="visually-hidden"
+              data-i18n="languageLabel"
+              >Language</label
+            >
             <select id="langSelect">
               <option value="en">English</option>
               <option value="ar">العربية</option>
@@ -42,7 +46,9 @@
             </select>
           </div>
         </div>
-        <p class="eyebrow" data-i18n="eyebrow">Personalized Beauty, Powered by AI</p>
+        <p class="eyebrow" data-i18n="eyebrow">
+          Personalized Beauty, Powered by AI
+        </p>
         <h1 class="site-title" data-i18n="title">Your Routine Builder</h1>
         <p class="site-subtitle" data-i18n="subtitle">
           Choose real products from our family of brands and let your advisor
@@ -50,102 +56,187 @@
         </p>
       </header>
 
-      <!-- ======================= FILTER + SEARCH (LevelUp: Product Search) ======================= -->
-      <div class="search-section">
-        <div class="search-field">
-          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-          <label for="productSearch" class="visually-hidden">Search products</label>
-          <input
-            id="productSearch"
-            type="text"
-            placeholder="Search by product or brand…"
-            data-i18n-placeholder="searchPlaceholder"
-            autocomplete="off"
-          />
+      <main class="site-main" aria-label="Main content">
+        <!-- ======================= FILTER + SEARCH (LevelUp: Product Search) ======================= -->
+        <div class="search-section">
+          <div class="search-field">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <label for="productSearch" class="visually-hidden"
+              >Search products</label
+            >
+            <input
+              id="productSearch"
+              type="text"
+              placeholder="Search by product or brand…"
+              data-i18n-placeholder="searchPlaceholder"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Custom dropdown instead of a native <select>: the browser's own
+               select popup sizes itself to the longest option and can spill
+               past the viewport on tablet/mobile. This version is a real
+               ARIA listbox, so width/position stay within our layout on every
+               screen size while remaining fully keyboard accessible. -->
+          <div class="custom-select" id="categoryFilterWrap">
+            <span
+              id="categoryFilterHiddenLabel"
+              class="visually-hidden"
+              data-i18n="categoryFilterLabel"
+            >
+              Filter by category
+            </span>
+            <button
+              type="button"
+              id="categoryTrigger"
+              class="custom-select-trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="categoryListbox"
+              aria-labelledby="categoryFilterHiddenLabel categoryTriggerLabel"
+            >
+              <span id="categoryTriggerLabel">All Categories</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <ul
+              id="categoryListbox"
+              class="custom-select-list"
+              role="listbox"
+              tabindex="-1"
+              aria-labelledby="categoryFilterHiddenLabel"
+              aria-hidden="true"
+              hidden
+            ></ul>
+          </div>
         </div>
 
-        <label for="categoryFilter" class="visually-hidden">Filter by category</label>
-        <select id="categoryFilter">
-          <option value="" data-i18n-cat="all">All Categories</option>
-          <option value="cleanser" data-i18n-cat="cleanser">Cleansers</option>
-          <option value="moisturizer" data-i18n-cat="moisturizer">Moisturizers</option>
-          <option value="skincare" data-i18n-cat="skincare">Skincare &amp; Treatments</option>
-          <option value="haircare" data-i18n-cat="haircare">Haircare</option>
-          <option value="hair color" data-i18n-cat="hair color">Hair Color</option>
-          <option value="hair styling" data-i18n-cat="hair styling">Hair Styling</option>
-          <option value="makeup" data-i18n-cat="makeup">Makeup</option>
-          <option value="suncare" data-i18n-cat="suncare">Suncare</option>
-          <option value="men's grooming" data-i18n-cat="men's grooming">Men's Grooming</option>
-          <option value="fragrance" data-i18n-cat="fragrance">Fragrance</option>
-        </select>
-      </div>
+        <!-- Products Grid -->
+        <section
+          id="productsContainer"
+          class="products-grid"
+          aria-label="Product results"
+        ></section>
 
-      <!-- Products Grid -->
-      <div id="productsContainer" class="products-grid" aria-live="polite"></div>
+        <!-- ======================= SELECTED PRODUCTS ======================= -->
+        <section class="selected-products">
+          <div class="selected-header">
+            <h2>
+              <span data-i18n="selectedProductsHeading">Selected Products</span>
+              <span id="selectedCount" class="count-badge">0</span>
+            </h2>
+            <button
+              id="clearAllBtn"
+              class="clear-all-btn"
+              type="button"
+              data-i18n="clearAll"
+            >
+              Clear All
+            </button>
+          </div>
 
-      <!-- ======================= SELECTED PRODUCTS ======================= -->
-      <section class="selected-products">
-        <div class="selected-header">
-          <h2><span data-i18n="selectedProductsHeading">Selected Products</span> <span id="selectedCount" class="count-badge">0</span></h2>
-          <button id="clearAllBtn" class="clear-all-btn" type="button" data-i18n="clearAll">Clear All</button>
-        </div>
+          <div
+            id="selectedProductsList"
+            class="selected-list"
+            role="list"
+            aria-label="Selected products"
+          ></div>
 
-        <div id="selectedProductsList" class="selected-list"></div>
-
-        <button id="generateRoutine" class="generate-btn" type="button" disabled>
-          <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-          <span data-i18n="generateBtn">Generate Routine</span>
-        </button>
-      </section>
-
-      <!-- ======================= CHAT AREA ======================= -->
-      <section class="chatbox">
-        <div class="chatbox-header">
-          <h2 data-i18n="chatHeading">Ask Your Advisor</h2>
-          <button id="clearHistoryBtn" class="clear-all-btn" type="button" data-i18n="clearHistory">Clear History</button>
-        </div>
-        <div id="chatWindow" class="chat-window" aria-live="polite">
-          <p class="placeholder-message" data-i18n="chatInitialPlaceholder">
-            Select a few products above and generate your routine to start the conversation.
-          </p>
-        </div>
-
-        <form id="chatForm" class="chat-form">
-          <label for="userInput" class="visually-hidden">Message</label>
-          <input
-            id="userInput"
-            name="userInput"
-            type="text"
-            placeholder="Generate a routine first, then ask a follow-up question…"
-            autocomplete="off"
+          <button
+            id="generateRoutine"
+            class="generate-btn"
+            type="button"
             disabled
-            required
-          />
-          <button type="submit" id="sendBtn" disabled>
-            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-            <span class="visually-hidden">Send</span>
+          >
+            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+            <span data-i18n="generateBtn">Generate Routine</span>
           </button>
-        </form>
-      </section>
+        </section>
+
+        <!-- ======================= CHAT AREA ======================= -->
+        <section class="chatbox">
+          <div class="chatbox-header">
+            <h2 data-i18n="chatHeading">Ask Your Advisor</h2>
+            <button
+              id="clearHistoryBtn"
+              class="clear-all-btn"
+              type="button"
+              data-i18n="clearHistory"
+            >
+              Clear History
+            </button>
+          </div>
+          <div
+            id="chatWindow"
+            class="chat-window"
+            role="log"
+            aria-live="polite"
+            aria-label="Chat messages"
+          >
+            <p class="placeholder-message" data-i18n="chatInitialPlaceholder">
+              Select a few products above and generate your routine to start the
+              conversation.
+            </p>
+          </div>
+
+          <form id="chatForm" class="chat-form">
+            <label for="userInput" class="visually-hidden">Message</label>
+            <input
+              id="userInput"
+              name="userInput"
+              type="text"
+              placeholder="Generate a routine first, then ask a follow-up question…"
+              autocomplete="off"
+              disabled
+              required
+            />
+            <button type="submit" id="sendBtn" disabled>
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+              <span class="visually-hidden">Send</span>
+            </button>
+          </form>
+        </section>
+      </main>
 
       <!-- ======================= DESCRIPTION MODAL ======================= -->
-      <div id="descriptionModal" class="modal-overlay" hidden>
-        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalProductName">
-          <button id="modalClose" class="modal-close" type="button" aria-label="Close">
+      <div
+        id="descriptionModal"
+        class="modal-overlay"
+        hidden
+        aria-hidden="true"
+      >
+        <div
+          class="modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modalProductName"
+          aria-describedby="modalDescription"
+        >
+          <button
+            id="modalClose"
+            class="modal-close"
+            type="button"
+            aria-label="Close"
+          >
             <i class="fa-solid fa-xmark" aria-hidden="true"></i>
           </button>
           <img id="modalImage" src="" alt="" class="modal-image" />
           <p id="modalBrand" class="modal-brand"></p>
           <h3 id="modalProductName"></h3>
           <p id="modalDescription" class="modal-description"></p>
-          <button id="modalSelectBtn" class="modal-select-btn" type="button"></button>
+          <button
+            id="modalSelectBtn"
+            class="modal-select-btn"
+            type="button"
+          ></button>
         </div>
       </div>
 
       <!-- ======================= FOOTER ======================= -->
       <footer class="site-footer">
-        <p data-i18n="footerCopyright">&copy; 2025 L'Oréal. All rights reserved.</p>
-        <nav>
+        <p data-i18n="footerCopyright">
+          &copy; 2025 L'Oréal. All rights reserved.
+        </p>
+        <nav aria-label="Footer links">
           <!-- These URLs are placeholders -->
           <a href="#" data-i18n="privacy">Privacy Policy</a>
           <a href="#" data-i18n="terms">Terms of Use</a>
